@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Console appender with terse colored output -->
+    <appender name="CONSOLE" class="xyz.jphil.logback.TerseAppender">
+        <encoder class="xyz.jphil.logback.TerseEncoder">
+            <classNameWidth>15</classNameWidth>
+            <includeDate>false</includeDate>
+            <millisPrecision>1</millisPrecision>
+        </encoder>
+    </appender>
+
+    <!-- File appender with terse plain text output -->
+    <appender name="FILE" class="xyz.jphil.logback.TerseFileAppender">
+        <file>${user.home}/speechfx/voicetyping/logs/program.log</file>
+        <encoder class="xyz.jphil.logback.TerseFileEncoder">
+            <classNameWidth>20</classNameWidth>
+            <includeDate>true</includeDate>
+            <millisPrecision>3</millisPrecision>
+        </encoder>
+    </appender>
+
+    <!-- Colored file appender for viewing with bat/tail -->
+    <appender name="FILE_COLORED" class="xyz.jphil.logback.TerseColoredFileAppender">
+        <file>${user.home}/speechfx/voicetyping/logs/program-color.log</file>
+        <encoder class="xyz.jphil.logback.TerseColoredFileEncoder">
+            <classNameWidth>20</classNameWidth>
+            <includeDate>true</includeDate>
+            <millisPrecision>3</millisPrecision>
+        </encoder>
+    </appender>
+
+    <!-- Root logger configuration -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE_COLORED"/>
+    </root>
+
+    <!-- Suppress verbose logging from dependencies -->
+    <logger name="com.github.kwhat.jnativehook" level="WARN"/>
+    <logger name="ch.qos.logback" level="WARN"/>
+</configuration>
