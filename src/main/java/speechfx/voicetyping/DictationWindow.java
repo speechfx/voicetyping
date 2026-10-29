@@ -54,11 +54,11 @@ public final class DictationWindow {
         FxThread.start();
         view = new DocView(new EditorModel(doc(p())));
         mic[0] = new MicStatusLabel();
-        status.getStyleClass().add("vt-dictation-state");
+        status.getStyleClass().add("sfx-dictation-state");
         var right = new Region();
         HBox.setHgrow(right, Priority.ALWAYS);
         var bar = new HBox(4);
-        bar.getStyleClass().add("vt-dictation-bar");
+        bar.getStyleClass().add("sfx-dictation-bar");
         bar.setAlignment(Pos.CENTER_LEFT);
         for (var a : DictationAction.values()) {
             if (!a.onToolbar) continue;
@@ -72,18 +72,18 @@ public final class DictationWindow {
             if (a == DictationAction.SAVE) bar.getChildren().add(new Separator(Orientation.VERTICAL));
         }
         var legend = new HBox();
-        legend.getStyleClass().add("vt-legend");
+        legend.getStyleClass().add("sfx-legend");
         legend.setAlignment(Pos.CENTER_RIGHT);
         for (var a : DictationAction.values()) {
             var item = new Label(a.keyName() + " " + a.legendLabel());
-            item.getStyleClass().add("vt-legend-item");
+            item.getStyleClass().add("sfx-legend-item");
             item.setOnMouseClicked(e -> { if (!item.isDisable()) act(a); });
             legendItems.put(a, item);
             legend.getChildren().add(item);
         }
         var statusBar = StatusBar.of(view, status, new Separator(Orientation.VERTICAL), mic[0], new Separator(Orientation.VERTICAL));
         var root = new BorderPane(view, new VBox(bar, Toolbar.of(view)), null, new VBox(statusBar, legend), null);
-        root.getStyleClass().add("vt-dictation");
+        root.getStyleClass().add("sfx-dictation");
         var scene = Styles.apply(new Scene(root, 900, 620));
         scene.addEventFilter(KeyEvent.KEY_PRESSED, this::keys);
         scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
@@ -191,7 +191,7 @@ public final class DictationWindow {
     void refresh() {
         buttons.forEach((a, b) -> {
             var icon = ToolbarIcons.draw(ICONS.get(a.icon(state)));
-            if (icon != null && a == DictationAction.START_PAUSE && a.icon(state).equals("fiber_manual_record")) icon.getStyleClass().add("vt-record");
+            if (icon != null && a == DictationAction.START_PAUSE && a.icon(state).equals("fiber_manual_record")) icon.getStyleClass().add("sfx-record");
             b.setGraphic(icon);
             b.setText(a.showsText() || icon == null ? a.label(state) : null);
             var tip = new Tooltip(a.tooltip(state));
@@ -205,11 +205,11 @@ public final class DictationWindow {
 
     void refreshStatus() {
         status.setText("● " + labelFor(state) + "   " + elapsedText.get());
-        status.getStyleClass().removeAll("vt-live", "vt-wait", "vt-bad");
+        status.getStyleClass().removeAll("sfx-live", "sfx-wait", "sfx-bad");
         var kind = switch (state) {
-            case LISTENING -> "vt-live";
-            case PAUSED, SWITCHING, RECONNECTING, FINISHING, STARTING -> "vt-wait";
-            case ERROR -> "vt-bad";
+            case LISTENING -> "sfx-live";
+            case PAUSED, SWITCHING, RECONNECTING, FINISHING, STARTING -> "sfx-wait";
+            case ERROR -> "sfx-bad";
             default -> null;
         };
         if (kind != null) status.getStyleClass().add(kind);

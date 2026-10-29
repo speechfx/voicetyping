@@ -46,11 +46,11 @@ final class OnSpotBar {
 
     void build() {
         status = new Label();
-        status.getStyleClass().add("vt-dictation-state");
+        status.getStyleClass().add("sfx-dictation-state");
         status.setTextOverrun(OverrunStyle.ELLIPSIS);
         status.setTooltip(new Tooltip());
         interim = new Label();
-        interim.getStyleClass().add("vt-onspot-interim");
+        interim.getStyleClass().add("sfx-onspot-interim");
         interim.setTextOverrun(OverrunStyle.LEADING_ELLIPSIS);
         interim.setMaxWidth(Double.MAX_VALUE);
         pause = button("pause", "Pause", onPause);
@@ -70,7 +70,7 @@ final class OnSpotBar {
         var top = new HBox(6, status, spacer, mic, speech, pause, stop, long_, copy);
         top.setAlignment(Pos.CENTER_LEFT);
         var root = new VBox(3, top, interim);
-        root.getStyleClass().add("vt-onspot");
+        root.getStyleClass().add("sfx-onspot");
         root.setOnMousePressed(e -> { dragX = e.getScreenX() - stage.getX(); dragY = e.getScreenY() - stage.getY(); });
         root.setOnMouseDragged(e -> { stage.setX(e.getScreenX() - dragX); stage.setY(e.getScreenY() - dragY); });
         root.setOnMouseReleased(e -> { if (e.isStillSincePress()) return; VoiceTypingSettings.setOnSpotBar(stage.getX(), stage.getY()); });
@@ -143,10 +143,10 @@ final class OnSpotBar {
         var name = t == null ? "" : t.name();
         var n = d.pendingWords();
         var held = n == 1 ? "1 word" : n + " words";
-        String line, tone = "vt-wait";
-        if (state == DictationState.ERROR) { line = "● Stopped by an error"; tone = "vt-bad"; }
+        String line, tone = "sfx-wait";
+        if (state == DictationState.ERROR) { line = "● Stopped by an error"; tone = "sfx-bad"; }
         else if (t == null) line = "● Click into the app to type into";
-        else if (d.gone) { line = "● " + name + " closed: " + held + " kept"; tone = "vt-bad"; }
+        else if (d.gone) { line = "● " + name + " closed: " + held + " kept"; tone = "sfx-bad"; }
         else if (n > 0 && d.away()) line = "● Holding " + held + " for " + name;
         else {
             line = switch (state) {
@@ -157,7 +157,7 @@ final class OnSpotBar {
                 case STOPPED -> n > 0 ? "Done: " + held + " to type" : "Done";
                 default -> "● " + name;
             };
-            if (state == DictationState.LISTENING) tone = "vt-live";
+            if (state == DictationState.LISTENING) tone = "sfx-live";
         }
         var tip = new StringBuilder(line.replace("● ", ""));
         if (t != null) tip.append("\nTyping into: ").append(t.title.isEmpty() ? name : t.title).append(" (").append(name).append(")");
@@ -166,7 +166,7 @@ final class OnSpotBar {
         tip.append("\nSpeech: ").append(SpeechMenu.describe());
         status.getTooltip().setText(tip.toString());
         status.setText(line);
-        status.getStyleClass().removeAll("vt-live", "vt-wait", "vt-bad");
+        status.getStyleClass().removeAll("sfx-live", "sfx-wait", "sfx-bad");
         status.getStyleClass().add(tone);
         interim.setText(state == DictationState.PAUSED ? "" : words);
         speech.setText(SpeechMenu.shortName());

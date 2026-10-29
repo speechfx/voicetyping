@@ -74,7 +74,7 @@ public final class HistoryWindow implements TranscriptHistory.HistoryChangeListe
         split.setOrientation(Orientation.HORIZONTAL);
         split.setDividerPositions(0.34);
         status = new Label("");
-        status.getStyleClass().add("vt-status");
+        status.getStyleClass().add("sfx-status");
         var legend = new KeyLegend()
                 .key(KeyCode.ENTER, "Paste", this::paste)
                 .key(KeyCode.F2, "Copy", this::copy)
@@ -84,9 +84,9 @@ public final class HistoryWindow implements TranscriptHistory.HistoryChangeListe
                 .key(KeyCode.F6, "Next tab", () -> tabs.getSelectionModel().select((tabs.getSelectionModel().getSelectedIndex() + 1) % tabs.getTabs().size()))
                 .key(KeyCode.ESCAPE, "Close", () -> stage.hide());
         var foot = new VBox(4, legend.bar(), status);
-        foot.getStyleClass().add("vt-foot");
+        foot.getStyleClass().add("sfx-foot");
         var root = new BorderPane(split, null, null, foot, null);
-        root.getStyleClass().add("vt-window");
+        root.getStyleClass().add("sfx-window");
         stage = FxWindows.show("Voice Typing — History", root, 820, 560, legend);
         stage.hide();
     }

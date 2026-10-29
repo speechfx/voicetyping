@@ -339,7 +339,7 @@ public class VoiceTyping implements NativeKeyListener {
             case "deepgram-flux" -> new DeepgramStreamingTranscriptionService(true);
             case "deepgram-streaming" -> new DeepgramStreamingTranscriptionService();
             case "nvidia-streaming" -> new NvidiaStreamingTranscriptionService();
-            default -> new TranscriptionService();
+            default -> new GeminiTranscriptionService();
         };
     }
 

@@ -25,7 +25,7 @@ public final class PhoneLinkDialog {
 
     static VBox foot(Label status, KeyLegend legend) {
         var foot = new VBox(8, status, legend.bar());
-        foot.getStyleClass().add("vt-foot");
+        foot.getStyleClass().add("sfx-foot");
         return foot;
     }
 
@@ -57,7 +57,7 @@ public final class PhoneLinkDialog {
                 .key(KeyCode.ESCAPE, "Close", () -> stage.close());
         var root = new BorderPane(box, new Label("Paste the Upstash connection block (the same one goes into the phone app):"),
                 null, foot(status, legend), null);
-        root.getStyleClass().add("vt-window");
+        root.getStyleClass().add("sfx-window");
         stage = FxWindows.show("Phone link", root, 620, 300, legend);
         stage.setAlwaysOnTop(true);
         box.requestFocus();

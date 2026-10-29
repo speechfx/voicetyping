@@ -20,7 +20,7 @@ final class OnSpotDelivery {
 
     final StringBuilder pending = new StringBuilder();
     final ScheduledExecutorService ticker = Executors.newSingleThreadScheduledExecutor(r -> {
-        var t = new Thread(r, "vt-onspot-delivery");
+        var t = new Thread(r, "sfx-onspot-delivery");
         t.setDaemon(true);
         return t;
     });

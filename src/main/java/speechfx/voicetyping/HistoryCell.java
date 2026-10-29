@@ -13,7 +13,7 @@ public final class HistoryCell extends ListCell<HistoryItem> {
     final VBox box = new VBox(1, preview, time);
 
     public HistoryCell() {
-        preview.getStyleClass().add("vt-history-preview");
+        preview.getStyleClass().add("sfx-history-preview");
         time.getStyleClass().add("vt-history-time");
     }
 

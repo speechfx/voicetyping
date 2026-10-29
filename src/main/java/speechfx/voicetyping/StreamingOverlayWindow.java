@@ -37,12 +37,12 @@ public class StreamingOverlayWindow {
         text.setEditable(false);
         text.setFocusTraversable(false);
         text.setWrapText(true);
-        text.getStyleClass().add("vt-overlay-text");
+        text.getStyleClass().add("sfx-overlay-text");
         var keys = new Label(GlobalHotkey.DICTATION_WINDOW.shown + "  long dictation");
         keys.setStyle("-fx-text-fill: #78C8FF; -fx-font-size: 11px;");
         var root = new BorderPane(text, status, null, keys, null);
         BorderPane.setMargin(text, new Insets(6, 0, 6, 0));
-        root.getStyleClass().add("vt-overlay");
+        root.getStyleClass().add("sfx-overlay");
         var screen = Screen.getPrimary().getVisualBounds();
         var w = Math.min(800, screen.getWidth() * 0.6);
         var h = 215.0;
