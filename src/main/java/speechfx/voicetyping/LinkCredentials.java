@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import datapotter.datahelper.Data;
 
 import java.io.IOException;

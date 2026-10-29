@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import javafx.animation.*;
@@ -36,7 +38,7 @@ public final class MicStatusLabel extends Label {
     }
 
     void show(String mic, Integer battery) {
-        var low = VoiceTypingSettings.getMicrophoneSettings().lowBatteryPercent();
+        var low = DictationSettings.getMicrophoneSettings().lowBatteryPercent();
         setText("Mic: " + mic + (battery == null ? "" : "   Battery " + battery + "%"));
         getStyleClass().removeAll("vt-low", "vt-very-low");
         if (battery != null && battery <= low) getStyleClass().add(battery <= low / 2 ? "vt-very-low" : "vt-low");

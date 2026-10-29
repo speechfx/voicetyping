@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.util.*;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -84,7 +86,7 @@ public final class MicOrderDialog {
     }
 
     void save() {
-        VoiceTypingSettings.setPreferredMicrophones(order);
+        DictationSettings.setPreferredMicrophones(order);
         stage.close();
     }
 }

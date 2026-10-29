@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.lang.foreign.Arena;
 
 /** Sends one Win+J (LWin down, J down, J up, LWin up), to see whether vt's keyboard hook answers. */

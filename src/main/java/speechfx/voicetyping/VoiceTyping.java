@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
@@ -99,7 +101,7 @@ public class VoiceTyping implements NativeKeyListener {
         EventQueue.invokeLater(() -> {
             overlayWindow = new StreamingOverlayWindow();
             dictationWindow = new DictationWindow();
-            chain = new SpeechChain(VoiceTypingSettings::getProvider);
+            chain = new SpeechChain(DictationSettings::getProvider);
             dictation = new DictationSession(dictationWindow, chain, history);
             var long_ = dictation;
             onSpot = new OnSpotSession(chain, history, msg -> showNotification("Voice Typing", msg, TrayIcon.MessageType.INFO), long_::continueWith);
@@ -331,7 +333,7 @@ public class VoiceTyping implements NativeKeyListener {
     }
 
     private TranscriptionProvider createProvider() {
-        return switch (VoiceTypingSettings.getProvider()) {
+        return switch (DictationSettings.getProvider()) {
             case "deepgram" -> new DeepgramTranscriptionService();
             case "deepgram-flux" -> new DeepgramStreamingTranscriptionService(true);
             case "deepgram-streaming" -> new DeepgramStreamingTranscriptionService();
@@ -591,6 +593,7 @@ public class VoiceTyping implements NativeKeyListener {
     }
 
     public static void main(String[] args) {
+        VoiceTypingSettings.init();
         // The JavaFX windows run next to the AWT tray; the toolkit stays up with no window open.
         FxThread.start();
 

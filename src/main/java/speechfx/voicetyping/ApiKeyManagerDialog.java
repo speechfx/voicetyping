@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.nio.file.Path;
 import java.util.List;
 import javafx.scene.control.Label;
@@ -51,7 +53,7 @@ public final class ApiKeyManagerDialog {
     }
 
     void reload(int select) {
-        keys = VoiceTypingSettings.getApiKeys();
+        keys = DictationSettings.getApiKeys();
         list.fill(keys.stream().map(k -> List.of(k.name(), mask(k.value()), k.isEnabled() ? "Yes" : "No")).toList(), select);
     }
 
@@ -60,7 +62,7 @@ public final class ApiKeyManagerDialog {
     }
 
     void showProvider() {
-        var p = VoiceTypingSettings.getProvider();
+        var p = DictationSettings.getProvider();
         provider.setText("Active provider: " + p + "   (change it in the tray menu)");
     }
 
@@ -68,7 +70,7 @@ public final class ApiKeyManagerDialog {
         ApiKeyForm.ask(stage, "Add Gemini API key", null).ifPresent(k -> {
             if (k.name().isEmpty()) k.name("Key " + (keys.size() + 1));
             keys.add(k);
-            VoiceTypingSettings.saveSettings();
+            DictationSettings.saveSettings();
             log.info("Added API key: {}", k.name());
             reload(keys.size() - 1);
             status.setText("Added " + k.name() + ".");
@@ -83,7 +85,7 @@ public final class ApiKeyManagerDialog {
             k.name(e.name().isEmpty() ? k.name() : e.name());
             k.value(e.value());
             k.enabled(e.enabled());
-            VoiceTypingSettings.saveSettings();
+            DictationSettings.saveSettings();
             log.info("Updated API key: {}", k.name());
             reload(i);
             status.setText("Saved " + k.name() + ".");
@@ -96,7 +98,7 @@ public final class ApiKeyManagerDialog {
         var k = keys.get(i);
         if (!Dialogs.confirm("Delete API key", "Delete the API key '" + k.name() + "'? This cannot be undone.")) return;
         keys.remove(i);
-        VoiceTypingSettings.saveSettings();
+        DictationSettings.saveSettings();
         log.info("Deleted API key: {}", k.name());
         reload(i);
         status.setText("Deleted " + k.name() + ".");

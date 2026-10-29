@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.util.Map;
 import java.util.function.Consumer;
 import javafx.geometry.*;

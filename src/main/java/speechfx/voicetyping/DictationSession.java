@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,7 +89,7 @@ public final class DictationSession implements DictationListener {
 
     void start() {
         if (isActive()) return;
-        cfg = VoiceTypingSettings.getLongRecordingSettings();
+        cfg = DictationSettings.getLongRecordingSettings();
         stamp = DictationNotes.newStamp();
         window.appendTimestamp();
         setState(DictationState.STARTING);

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +13,7 @@ import javax.sound.sampled.AudioFormat;
 import javafx.animation.*;
 import javafx.util.Duration;
 
-import static speechfx.voicetyping.DictationState.*;
+import static speechfx.dictation.DictationState.*;
 
 /**
  * Dictation into another app: the long-dictation engine (LongAudioRecorder, SegmentedStreamingSession,
@@ -94,7 +96,7 @@ public final class OnSpotSession implements DictationListener {
             closeNow();
         }
         recorder = null;
-        cfg = VoiceTypingSettings.getLongRecordingSettings();
+        cfg = DictationSettings.getLongRecordingSettings();
         stamp = DictationNotes.newStamp();
         kind = target == null || target.app.isEmpty() ? "on-spot" : "into-" + target.app;
         lateText.setLength(0);

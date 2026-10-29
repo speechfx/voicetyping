@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.util.*;
 import java.util.function.*;
 import javafx.animation.*;

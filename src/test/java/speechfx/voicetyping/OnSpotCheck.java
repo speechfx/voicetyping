@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.*;
 import java.lang.foreign.MemorySegment;

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.nio.file.Path;
 import java.util.concurrent.*;
 import javax.sound.sampled.AudioSystem;
@@ -13,9 +15,9 @@ public class HandOverCheck {
     public static void main(String[] args) throws Exception {
         FxThread.start();
         var got = new CompletableFuture<String>();
-        var s = new OnSpotSession(new SpeechChain(VoiceTypingSettings::getProvider), new TranscriptHistory(), m -> System.out.println("NOTIFY " + m), got::complete);
+        var s = new OnSpotSession(new SpeechChain(DictationSettings::getProvider), new TranscriptHistory(), m -> System.out.println("NOTIFY " + m), got::complete);
         var never = new TargetWindow(1, 0, "nowhere", "nowhere");
-        var fmt = new LongAudioRecorder(VoiceTypingSettings.getLongRecordingSettings(), null, null).format();
+        var fmt = new LongAudioRecorder(DictationSettings.getLongRecordingSettings(), null, null).format();
         FxThread.call(() -> { s.prepare(never); s.stream.start(fmt); return null; });
         var handAt = Long.parseLong(args[1]) * 10;
         try (var in = AudioSystem.getAudioInputStream(Path.of(args[0]).toFile())) {

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Optional;

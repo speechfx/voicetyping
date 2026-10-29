@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.io.File;
 import java.nio.file.*;
 import javax.imageio.ImageIO;
@@ -34,7 +36,7 @@ public class WindowReplay {
         Thread.sleep(1500);
         window.appendTimestamp();
         var t0 = System.currentTimeMillis();
-        var cfg = VoiceTypingSettings.getLongRecordingSettings();
+        var cfg = DictationSettings.getLongRecordingSettings();
         var s = new SegmentedStreamingSession(new SpeechChain(() -> args[0]), cfg, new DictationListener() {
             public void onFinalText(String t) { System.out.printf("%6d FINAL   %s%n", System.currentTimeMillis() - t0, t); window.appendFinal(t); }
             public void onInterimText(String t) { if (!t.isEmpty()) System.out.printf("%6d interim %s%n", System.currentTimeMillis() - t0, t); window.setInterim(t); }

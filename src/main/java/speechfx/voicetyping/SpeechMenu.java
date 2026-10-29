@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -33,19 +35,19 @@ public final class SpeechMenu {
         var items = new ArrayList<MenuItem>();
         var provider = provider();
         var services = new ToggleGroup();
-        for (var s : SERVICES) items.add(radio(s[1], services, s[0].equals(provider), () -> VoiceTypingSettings.setProvider(s[0])));
+        for (var s : SERVICES) items.add(radio(s[1], services, s[0].equals(provider), () -> DictationSettings.setProvider(s[0])));
         items.add(new SeparatorMenuItem());
         var heading = new MenuItem(name(provider) + " account");
         heading.setDisable(true);
         items.add(heading);
         var keyProvider = SpeechChain.keyProvider(provider);
-        var pinned = VoiceTypingSettings.getSpeechSettings().pinned(keyProvider);
+        var pinned = DictationSettings.getSpeechSettings().pinned(keyProvider);
         var accounts = new ToggleGroup();
-        items.add(radio("Automatic (rotate among keys)", accounts, pinned.isEmpty(), () -> VoiceTypingSettings.setSpeechKey(keyProvider, "")));
+        items.add(radio("Automatic (rotate among keys)", accounts, pinned.isEmpty(), () -> DictationSettings.setSpeechKey(keyProvider, "")));
         for (var k : SpeechKeys.all(keyProvider)) {
             var frozen = SpeechKeys.frozenUntil(k);
             var label = account(k) + (frozen == null ? "" : "   (frozen until " + HHMM.format(frozen) + ")");
-            var item = radio(label, accounts, k.id().equals(pinned), () -> VoiceTypingSettings.setSpeechKey(keyProvider, k.id()));
+            var item = radio(label, accounts, k.id().equals(pinned), () -> DictationSettings.setSpeechKey(keyProvider, k.id()));
             item.setDisable(frozen != null);
             items.add(item);
         }
@@ -63,7 +65,7 @@ public final class SpeechMenu {
 
     /** The streaming provider in use: the tray's choice, or Deepgram if that is not a streaming one. */
     static String provider() {
-        var p = VoiceTypingSettings.getProvider();
+        var p = DictationSettings.getProvider();
         return Arrays.stream(SERVICES).anyMatch(s -> s[0].equals(p)) ? p : SERVICES[0][0];
     }
 
@@ -79,7 +81,7 @@ public final class SpeechMenu {
     public static String describe() {
         var provider = provider();
         var keyProvider = SpeechChain.keyProvider(provider);
-        var pinned = VoiceTypingSettings.getSpeechSettings().pinned(keyProvider);
+        var pinned = DictationSettings.getSpeechSettings().pinned(keyProvider);
         var key = SpeechKeys.all(keyProvider).stream().filter(k -> k.id().equals(pinned)).findFirst();
         return name(provider) + ", " + key.map(SpeechMenu::account).orElse("automatic");
     }

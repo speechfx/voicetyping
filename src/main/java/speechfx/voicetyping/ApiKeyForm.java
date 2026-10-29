@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.util.Optional;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import javafx.scene.Scene;
 
 /** Puts the shared stylesheet (vt.css: layout only, JavaFX's default look) on a scene. */

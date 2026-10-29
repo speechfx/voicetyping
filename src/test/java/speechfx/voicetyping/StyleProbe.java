@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.lang.foreign.*;
 
 /** Prints the extended style and owner of the window titled args[0]. */

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.io.IOException;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;

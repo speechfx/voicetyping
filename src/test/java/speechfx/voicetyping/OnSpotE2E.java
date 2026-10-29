@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.io.File;
 import java.lang.foreign.MemorySegment;
 import java.nio.file.*;
@@ -24,13 +26,13 @@ public class OnSpotE2E {
         var shots = Path.of(args[3]);
         var windows = new ActiveWindowCapture();
         FxThread.start();
-        var s = new OnSpotSession(new SpeechChain(VoiceTypingSettings::getProvider), new TranscriptHistory(), m -> System.out.println("NOTIFY " + m), t -> System.out.println("TO LONG " + t));
+        var s = new OnSpotSession(new SpeechChain(DictationSettings::getProvider), new TranscriptHistory(), m -> System.out.println("NOTIFY " + m), t -> System.out.println("TO LONG " + t));
         Thread.sleep(500);
 
         OnSpotCheck.front(windows, target);
         var fmt = FxThread.call(() -> {
             s.prepare(target);
-            var f = new LongAudioRecorder(VoiceTypingSettings.getLongRecordingSettings(), null, null).format();
+            var f = new LongAudioRecorder(DictationSettings.getLongRecordingSettings(), null, null).format();
             s.go(f, target);
             return f;
         });

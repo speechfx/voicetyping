@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import org.slf4j.LoggerFactory;
 

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.function.Consumer;

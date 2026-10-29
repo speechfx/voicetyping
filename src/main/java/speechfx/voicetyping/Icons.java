@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;

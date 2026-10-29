@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 /** Which desktop vt is running on; the only place that asks. */
 public final class Platform {
 

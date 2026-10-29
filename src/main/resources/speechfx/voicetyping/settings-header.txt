@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Voice Typing settings (the app's own). Provider, keys, microphones and recording are in
+~/speechfx/dictation/DictationSettings.xml, shared with every other dictation client.
+
+hotkey: the key that opens the dictation window, e.g. Ctrl+Z (default Win+Y,
+  or Ctrl+Option+Y on a Mac); read at start, so restart after changing it
+on-spot-hotkey: the key that dictates into the app in front (default Win+J,
+  or Ctrl+Option+J on a Mac); read at start
+on-spot: typeMaxChars (longer text is pasted), pasteApps / typeApps, and where the bar was left
+-->

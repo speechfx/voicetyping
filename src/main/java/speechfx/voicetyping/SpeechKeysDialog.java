@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;

@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.*;

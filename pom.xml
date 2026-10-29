@@ -36,8 +36,6 @@
         <main.class>speechfx.voicetyping.VoiceTyping</main.class>
         <!-- the released app version (Mac app, update check) -->
         <vt.release>1.1.0</vt.release>
-        <grpc.version>1.73.0</grpc.version>
-        <protobuf.version>3.25.5</protobuf.version>
         <jackson.version>2.18.0</jackson.version>
         <lombok.version>1.18.38</lombok.version>
     </properties>
@@ -55,11 +53,10 @@
             <version>1.0</version>
         </dependency>
 
-        <!-- Gemini client for the batch Gemini provider -->
         <dependency>
-            <groupId>io.github.xyz-jphil</groupId>
-            <artifactId>xyz-jphil-ai-gemini</artifactId>
-            <version>1.1</version>
+            <groupId>io.github.speechfx</groupId>
+            <artifactId>speechfx-dictation</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -83,12 +80,6 @@
             <version>${jackson.version}</version>
         </dependency>
 
-        <!-- MP3 encoding - LAME wrapper -->
-        <dependency>
-            <groupId>de.sciss</groupId>
-            <artifactId>jump3r</artifactId>
-            <version>1.0.5</version>
-        </dependency>
 
         <!-- Global keyboard hooks -->
         <dependency>
@@ -127,34 +118,6 @@
             <version>2.0.9</version>
         </dependency>
 
-        <!-- gRPC for NVIDIA Riva / Nemotron ASR streaming -->
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty-shaded</artifactId>
-            <version>${grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-protobuf</artifactId>
-            <version>${grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-stub</artifactId>
-            <version>${grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>${protobuf.version}</version>
-        </dependency>
-        <!-- javax.annotation.Generated referenced by grpc-generated stubs (absent from JDK) -->
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-            <scope>provided</scope>
-        </dependency>
 
         <dependency>
             <groupId>io.github.xyz-jphil</groupId>
@@ -184,34 +147,7 @@
                 <includes><include>vt-version.properties</include></includes>
             </resource>
         </resources>
-        <extensions>
-            <!-- Resolves ${os.detected.classifier} for the protoc/grpc binaries -->
-            <extension>
-                <groupId>kr.motd.maven</groupId>
-                <artifactId>os-maven-plugin</artifactId>
-                <version>1.7.1</version>
-            </extension>
-        </extensions>
         <plugins>
-            <!-- protoc: compile the Riva .proto files (src/main/proto) + gRPC service stubs -->
-            <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>0.6.1</version>
-                <configuration>
-                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
-                    <pluginId>grpc-java</pluginId>
-                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>compile-custom</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

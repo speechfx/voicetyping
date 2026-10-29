@@ -1,5 +1,7 @@
 package speechfx.voicetyping;
 
+import speechfx.dictation.*;
+
 import java.lang.foreign.*;
 import static java.lang.foreign.ValueLayout.*;
 
