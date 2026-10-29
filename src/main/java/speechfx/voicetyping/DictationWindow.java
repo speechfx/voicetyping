@@ -54,6 +54,7 @@ public final class DictationWindow {
         FxThread.start();
         view = new DocView(new EditorModel(doc(p())));
         mic[0] = new MicStatusLabel();
+        mic[0].startPolling();
         status.getStyleClass().add("sfx-dictation-state");
         var right = new Region();
         HBox.setHgrow(right, Priority.ALWAYS);
