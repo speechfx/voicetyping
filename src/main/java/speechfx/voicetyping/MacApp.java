@@ -20,14 +20,14 @@ import java.util.Properties;
 
 /**
  * The macOS-only parts: starting at login (a per-user LaunchAgent, no admin rights) and updating
- * from the public releases repository, whose install.sh both installs and updates the app.
+ * from this repository's public releases, whose install.sh both installs and updates the app.
  */
 public final class MacApp {
 
     private static final Logger log = LoggerFactory.getLogger(MacApp.class);
 
-    public static final String RELEASES_REPO = "speechfx/voicetyping-releases";
-    public static final String INSTALL_COMMAND = "curl -fsSL https://raw.githubusercontent.com/" + RELEASES_REPO + "/main/install.sh | bash";
+    public static final String RELEASES_REPO = "speechfx/voicetyping";
+    public static final String INSTALL_COMMAND = "curl -fsSL https://raw.githubusercontent.com/" + RELEASES_REPO + "/main/macos/install.sh | bash";
     static final String AGENT_LABEL = "io.github.speechfx.voicetyping";
     static final String APP_NAME = "Voice Typing";
 

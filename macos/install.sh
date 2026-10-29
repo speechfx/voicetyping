@@ -1,10 +1,10 @@
 #!/bin/bash
 # Voice Typing for macOS - installs, or updates to, the latest release:
-#   curl -fsSL https://raw.githubusercontent.com/speechfx/voicetyping-releases/main/install.sh | bash
-# Needs no admin rights. VT_ZIP_URL overrides the download (any curl URL, file:// included).
+#   curl -fsSL https://raw.githubusercontent.com/speechfx/voicetyping/main/macos/install.sh | bash
+# Needs no admin rights. VT_ZIP_URL and VT_JAR_URL override the downloads (any curl URL, file:// included).
 set -euo pipefail
 
-REPO="speechfx/voicetyping-releases"
+REPO="speechfx/voicetyping"
 APP="Voice Typing"
 AGENT="io.github.speechfx.voicetyping"
 say() { printf '\033[1m%s\033[0m\n' "$*"; }
@@ -30,12 +30,17 @@ if ! have_java; then
 fi
 
 # 2. The app itself.
-url="${VT_ZIP_URL:-}"
-if [ -z "$url" ]; then
-  url=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" \
-    | grep -o '"browser_download_url": *"[^"]*-macos\.zip"' | head -1 | sed 's/.*"\(http[^"]*\)"$/\1/')
-fi
-[ -n "$url" ] || { echo "Could not find the latest release of $APP." >&2; exit 1; }
+release=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" || true)
+asset() { printf '%s' "$release" | grep -o "\"browser_download_url\": *\"[^\"]*$1\"" | head -1 | sed 's/.*"\(http[^"]*\)"$/\1/'; }
+url="${VT_ZIP_URL:-$(asset '-macos\.zip')}"
+jar_url="${VT_JAR_URL:-$(asset 'speechfx-voicetyping-app\.jar')}"
+[ -n "$url" ] && [ -n "$jar_url" ] || { echo "Could not find the latest release of $APP." >&2; exit 1; }
+
+# The app runs this jar rather than carrying one, so an update of the code alone is just a new jar.
+jar_dir="$HOME/speechfx/voicetyping/app"
+mkdir -p "$jar_dir"
+curl -fL --progress-bar -o "$jar_dir/speechfx-voicetyping-app.jar.part" "$jar_url"
+mv -f "$jar_dir/speechfx-voicetyping-app.jar.part" "$jar_dir/speechfx-voicetyping-app.jar"
 
 dir=/Applications
 [ -w "$dir" ] || { dir="$HOME/Applications"; mkdir -p "$dir"; }
