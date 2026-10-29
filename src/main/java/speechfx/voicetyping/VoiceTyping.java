@@ -1,6 +1,7 @@
 package speechfx.voicetyping;
 
 import speechfx.dictation.*;
+import speechfx.dictation.controls.*;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
@@ -195,7 +196,7 @@ public class VoiceTyping implements NativeKeyListener {
         SystemTray tray = SystemTray.getSystemTray();
         if (Platform.MAC) macTrayItems = new MacTrayItems((title, msg) -> showNotification(title, msg, TrayIcon.MessageType.INFO));
         trayMenu = new TrayMenu(this::trayItems);
-        SpeechMenu.onChange = this::speechChanged;
+        SpeechMenu.onChange(this::speechChanged);
 
         // The icon only: the menu is JavaFX (TrayMenu), opened by a right click, or any click on the Mac's menu bar
         trayIcon = new TrayIcon(createDefaultIcon(), "Voice Typing - Press " + GlobalHotkey.DICTATION_WINDOW.shown + " to dictate");

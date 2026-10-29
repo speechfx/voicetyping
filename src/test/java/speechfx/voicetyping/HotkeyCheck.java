@@ -1,6 +1,7 @@
 package speechfx.voicetyping;
 
 import speechfx.dictation.*;
+import speechfx.dictation.controls.*;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;

@@ -1,6 +1,7 @@
 package speechfx.voicetyping;
 
 import speechfx.dictation.*;
+import speechfx.dictation.controls.*;
 
 import java.io.File;
 import javax.imageio.ImageIO;

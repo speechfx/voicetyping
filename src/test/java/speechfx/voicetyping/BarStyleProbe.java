@@ -1,6 +1,7 @@
 package speechfx.voicetyping;
 
 import speechfx.dictation.*;
+import speechfx.dictation.controls.*;
 
 /** Builds and shows the floating bar, then prints its window styles (taskbar button or not). */
 public class BarStyleProbe {

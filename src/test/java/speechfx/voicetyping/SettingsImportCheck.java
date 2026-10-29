@@ -2,6 +2,7 @@ package speechfx.voicetyping;
 
 import java.nio.file.*;
 import speechfx.dictation.*;
+import speechfx.dictation.controls.*;
 
 /** Runs the first-start settings import against a copy of the real settings in a scratch home: args[0]. */
 public class SettingsImportCheck {

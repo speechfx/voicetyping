@@ -1,6 +1,7 @@
 package speechfx.voicetyping;
 
 import speechfx.dictation.*;
+import speechfx.dictation.controls.*;
 
 /** Overlay then bar, as at vt start-up; every 250 ms prints whether the bar stage shows and which windows exist. */
 public class BarTrace {
